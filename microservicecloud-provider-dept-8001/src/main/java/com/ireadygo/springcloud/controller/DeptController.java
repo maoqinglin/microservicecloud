@@ -3,6 +3,8 @@ package com.ireadygo.springcloud.controller;
 import com.ireadygo.springcloud.entities.Dept;
 import com.ireadygo.springcloud.service.DeptService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,5 +28,20 @@ public class DeptController {
     @RequestMapping(value = "/dept/list", method = RequestMethod.GET)
     public List<Dept> list() {
         return deptService.list();
+    }
+
+    @Autowired
+    DiscoveryClient discoveryClient;
+
+    @RequestMapping(value = "/dept/discovery", method = RequestMethod.GET)
+    public Object discovery() {
+        List<String> serviceNames = discoveryClient.getServices();
+        System.out.println("**************" + serviceNames);
+        List<ServiceInstance> serviceInstances = discoveryClient.getInstances("microservicecloud-dept");
+        for (ServiceInstance serviceInstance : serviceInstances) {
+            System.out.println(serviceInstance.getInstanceId() + "\t" + serviceInstance.getHost() + "\t" +
+                    serviceInstance.getPort() + "\t" + serviceInstance.getUri() + "\t");
+        }
+        return this.discoveryClient;
     }
 }

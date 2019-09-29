@@ -15,3 +15,17 @@ spring:
     username: root
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
+
+eureka:
+  client:   # 客户端注册进 Eureka 服务列表内
+    service-url:
+      defaultZone: http://localhost:7001/eureka
+  instance:
+    instance-id: microservicecloud-dept8001   # 自定义服务的名称
+    prefer-ip-address: true     # 显示微服务的 IP 地址
+
+info:
+  app.name: moqi-microservicecloud
+  company.name: www.ireadygo.com
+  build.artifactId: $project.artifactId$
+  build.version: $project.version$
