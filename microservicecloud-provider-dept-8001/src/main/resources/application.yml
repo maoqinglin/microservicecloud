@@ -8,7 +8,7 @@ mybatis:
 
 spring:
   application:
-    name: microservicecloud-dept
+    name: microservicecloud-dept  # 被注册到 Eureka 服务端的服务名
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     url: jdbc:mysql://localhost:3306/clouddb01?serverTimezone=UTC&characterEncoding=utf-8
