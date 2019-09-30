@@ -1,0 +1,33 @@
+server:
+  port: 8001
+mybatis:
+  config-location: classpath:mybatis/mybatis.cfg.xml
+  mapper-locations:
+  - classpath:mybatis/mapper/**/*.xml
+  type-aliases-package: com.ireadygo.springcloud.entities
+
+spring:
+  application:
+    name: microservicecloud-dept  # 被注册到 Eureka 服务端的服务名
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://localhost:3306/clouddb01?serverTimezone=UTC&characterEncoding=utf-8
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+eureka:
+  client:   # 客户端注册进 Eureka 服务列表内
+    service-url:
+      defaultZone: http://eureka7001.com:7001/eureka/,http://eureka7002.com:7002/eureka/,http://eureka7003.com:7003/eureka/ # 集群配置
+    #      defaultZone: http://localhost:7001/eureka 单机配置
+
+  instance:
+    instance-id: microservicecloud-dept8001-hystrix   # 自定义服务的名称
+    prefer-ip-address: true     # 显示微服务的 IP 地址
+
+info:
+  app.name: moqi-microservicecloud
+  company.name: www.ireadygo.com
+  build.artifactId: $project.artifactId$
+  build.version: $project.version$

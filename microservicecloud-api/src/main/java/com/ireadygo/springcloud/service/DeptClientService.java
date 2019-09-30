@@ -8,7 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
 
 // Rest 负载均衡
-@FeignClient(value = "microservicecloud-dept")
+//@FeignClient(value = "microservicecloud-dept")
+@FeignClient(value = "microservicecloud-dept", fallbackFactory = DeptClientServiceFallbackFactory.class)
 public interface DeptClientService {
 
     //    请求服务 Rest 接口的封装
