@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ireadygo.springcloud.dao.DeptDao">
+
+    <!--Dept findById(Long id);-->
+    <select id="findById" resultType="com.ireadygo.springcloud.entities.Dept">
+        select *
+        from dept
+        where deptno = #{deptno}
+    </select>
+
+    <!--List<Dept> findAll();-->
+    <select id="findAll" resultType="com.ireadygo.springcloud.entities.Dept">
+        select *
+        from dept
+    </select>
+
+    <!--boolean addDept(Dept dept);-->
+    <insert id="addDept">
+        insert into dept (dname, db_source)
+        values (#{dname}, DATABASE())
+    </insert>
+</mapper>
